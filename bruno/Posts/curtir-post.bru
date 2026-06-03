@@ -1,0 +1,15 @@
+meta {
+  name: Curtir / Descurtir Post
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/api/v1/posts/1/curtir
+  body: none
+  auth: none
+}
+
+params:query {
+  usuarioId: 1
+}

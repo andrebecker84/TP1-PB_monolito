@@ -1,0 +1,14 @@
+.app {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  background:
+    radial-gradient(ellipse 80% 40% at 50% 0%, rgba(124,111,247,.06) 0%, transparent 55%),
+    var(--bg);
+}
+
+.content {
+  flex: 1;
+  margin-left: var(--sidebar-w, var(--sidebar-mini));
+  transition: margin-left .24s cubic-bezier(.4,0,.2,1);
+  min-height: calc(100vh - var(--header-h));
+}

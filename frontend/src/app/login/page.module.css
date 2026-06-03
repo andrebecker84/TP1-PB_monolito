@@ -1,0 +1,168 @@
+.page {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1rem;
+  background:
+    radial-gradient(ellipse 70% 50% at 20% 30%, rgba(124,111,247,.1) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 80% 70%, rgba(34,211,238,.07) 0%, transparent 50%),
+    var(--bg);
+}
+
+.card {
+  display: flex; width: 100%; max-width: 880px; min-height: 530px;
+  background: var(--surface);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg), var(--glow);
+}
+
+/* Brand panel (lado esquerdo com imagem) */
+.brand {
+  flex: 1;
+  position: relative;
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: flex-start;
+  padding: 2.5rem;
+  min-height: 480px;
+}
+.brandBg {
+  position: absolute; inset: 0;
+  background-image: url('/images/login-bg.jpg');
+  background-size: cover; background-position: center;
+}
+.brandOverlay {
+  position: absolute; inset: 0;
+  background: rgba(4, 12, 26, 0.50);
+}
+.brandContent {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column;
+  align-items: center;
+  width: 100%;
+  flex: 1;
+  margin-top: 8rem;
+  margin-bottom: 0;
+}
+
+.brandGlass {
+  display: flex; flex-direction: column; gap: 1.25rem;
+  padding: 2rem 2rem 2.25rem;
+  width: 100%;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.30), inset 0 1px 0 rgba(255,255,255,.18);
+}
+
+/* foto borrada atrás do card — usa background-attachment:fixed para alinhar
+   com o .brandBg e evita depender de backdrop-filter + stacking context */
+.brandGlass::before {
+  content: '';
+  position: absolute;
+  inset: -30px;
+  background-image: url('/images/login-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: blur(9px);
+  z-index: 0;
+}
+
+/* tint semitransparente sobre a foto borrada */
+.brandGlass::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 18, 60, 0.42);
+  z-index: 1;
+}
+
+/* conteúdo do card acima dos pseudo-elementos */
+.brandGlass > * {
+  position: relative;
+  z-index: 2;
+}
+.logo { display: flex; align-items: center; gap: .75rem; }
+.logoIcon {
+  font-size: 2.6rem;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0.7px rgba(124, 111, 247, 0.8);
+}
+.logoText {
+  font-size: 1.85rem; font-weight: 800; letter-spacing: .20em;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.tagline { font-size: 0.95rem; font-weight: 300; letter-spacing: .08em; color: rgba(255,255,255,.75); line-height: 1.6; }
+.features { list-style: none; display: flex; flex-direction: column; gap: 1.1rem; }
+.features li { font-size: 0.9rem; font-weight: 700; color: rgba(255,255,255,.9); display: flex; align-items: center; gap: .625rem; line-height: 1.5; }
+.featureIcon { flex-shrink: 0; color: #fff; opacity: .85; }
+
+/* Form panel */
+.form {
+  flex: 1; padding: 3rem 2.5rem;
+  display: flex; flex-direction: column; gap: 1.25rem;
+}
+.title    { font-size: 1.875rem; font-weight: 800; color: var(--text); }
+.subtitle { font-size: .9375rem; color: var(--text-muted); margin-top: -.75rem; }
+
+.error {
+  background: rgba(248,113,113,.1); border: 1px solid rgba(248,113,113,.25);
+  border-radius: var(--radius); padding: .75rem 1rem;
+  font-size: .875rem; color: var(--danger);
+}
+
+.loading { display: flex; flex-direction: column; gap: .75rem; }
+.skeleton {
+  height: 68px; border-radius: var(--radius);
+  background: linear-gradient(90deg, var(--surface-2) 25%, var(--surface-3) 50%, var(--surface-2) 75%);
+  background-size: 200% 100%; animation: shimmer 1.4s infinite;
+}
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+.userList { display: flex; flex-direction: column; gap: .625rem; max-height: 290px; overflow-y: auto; }
+
+.userCard {
+  display: flex; align-items: center; gap: .875rem;
+  padding: .875rem 1rem;
+  background: var(--surface-2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  text-align: left;
+  transition: border-color .15s, background .15s, box-shadow .15s;
+}
+.userCard:hover { border-color: var(--primary); background: var(--surface-3); }
+.userCardSelected {
+  border-color: var(--primary) !important;
+  background: var(--primary-dim) !important;
+  box-shadow: 0 0 0 2px var(--primary-glow);
+}
+.avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .875rem; font-weight: 700; color: #fff; flex-shrink: 0;
+}
+.userInfo { flex: 1; min-width: 0; }
+.userName { display: block; font-size: .9375rem; font-weight: 600; color: var(--text); }
+.userMeta { display: block; font-size: .75rem; color: var(--text-muted); margin-top: 1px; }
+.check { color: var(--primary); font-weight: 700; font-size: 1rem; }
+
+.btnEntrar {
+  background: var(--gradient); color: #fff;
+  padding: .8rem 1.5rem; border-radius: var(--pill);
+  font-size: 1rem; font-weight: 700; width: 100%;
+  margin-top: auto;
+  display: flex; align-items: center; justify-content: center; gap: .5rem;
+  box-shadow: 0 4px 18px var(--primary-glow);
+}
+.btnEntrar:hover:not(:disabled) { opacity: .9; box-shadow: 0 6px 24px var(--primary-glow); }
+
+@media (max-width: 640px) {
+  .card { flex-direction: column; }
+  .brand { display: none; }
+  .form { padding: 2rem 1.5rem; }
+}

@@ -1,0 +1,230 @@
+/* ── Fixed mini sidebar — always visible ── */
+.sidebar {
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  z-index: 150;
+  width: var(--sidebar-mini);
+  overflow: hidden;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  transition: width .24s cubic-bezier(.4,0,.2,1);
+  will-change: width;
+}
+.sidebar.expanded { width: var(--sidebar-full); }
+
+/* ── Labels: hidden by max-width:0 when mini ── */
+.lbl {
+  max-width: 0; overflow: hidden; white-space: nowrap;
+  opacity: 0; font-size: .9rem; font-weight: 500; color: inherit;
+  transition: max-width .22s ease, opacity .18s ease;
+  pointer-events: none; flex-shrink: 0;
+}
+.sidebar.expanded .lbl {
+  max-width: 180px; opacity: 1; pointer-events: auto;
+}
+
+/* ── Sidebar top (hamburger) ── */
+.sidebarTop {
+  height: var(--header-h);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar.expanded .sidebarTop { justify-content: flex-start; padding-left: .75rem; }
+
+.hamburger {
+  width: 36px; height: 36px; border-radius: var(--radius);
+  background: none; color: var(--text-dim); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: background .15s, color .15s;
+}
+.hamburger:hover { background: var(--surface-2); color: var(--primary); }
+
+.sidebarLogo {
+  display: flex; align-items: center; gap: .4rem;
+  max-width: 0; overflow: hidden; opacity: 0;
+  transform: translateX(-6px);
+  transition: max-width .24s ease, opacity .22s ease .08s, transform .22s ease .08s;
+  pointer-events: none;
+}
+.sidebar.expanded .sidebarLogo {
+  max-width: 180px; opacity: 1; pointer-events: auto;
+  transform: translateX(0);
+}
+.sidebarLogoIcon { color: var(--primary); filter: drop-shadow(0 0 4px var(--primary)); flex-shrink: 0; }
+.sidebarLogoText {
+  font-size: .9375rem; font-weight: 800; letter-spacing: .05em; white-space: nowrap;
+  background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Profile ── */
+.profile {
+  display: flex; align-items: center; gap: 0;
+  padding: .875rem .75rem;
+  flex-shrink: 0; overflow: hidden;
+  justify-content: center;
+}
+.sidebar.expanded .profile { justify-content: flex-start; gap: .875rem; }
+.avatar {
+  width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .8125rem; font-weight: 700; color: #fff;
+  box-shadow: 0 0 0 2.5px rgba(124,111,247,.5);
+  z-index: 1;
+}
+.profileInfo {
+  display: flex; flex-direction: column; gap: .2rem;
+  max-width: 0; overflow: hidden; opacity: 0;
+  transition: max-width .22s ease, opacity .18s ease;
+  pointer-events: none;
+}
+.sidebar.expanded .profileInfo {
+  max-width: 200px; opacity: 1; pointer-events: auto;
+}
+.profileName  { font-size: .9rem; font-weight: 700; color: var(--text); white-space: nowrap; }
+.papelBadge {
+  display: inline-flex; align-items: center;
+  font-size: .78rem; font-weight: 700;
+  padding: .22rem .7rem; border-radius: 99px; width: fit-content;
+  white-space: nowrap;
+}
+.profileEscola { font-size: .76rem; color: var(--text-muted); white-space: nowrap; }
+
+/* ── Navigation ── */
+.nav {
+  display: flex; flex-direction: column;
+  padding: .5rem .5rem; gap: .1rem;
+}
+
+.navItem {
+  display: flex; align-items: center; gap: 0;
+  padding: .6rem .625rem;
+  border-radius: var(--radius);
+  background: none; text-align: left; width: 100%;
+  color: var(--text-dim);
+  overflow: hidden; transition: background .15s, color .15s;
+  cursor: pointer;
+  justify-content: center;
+}
+.sidebar.expanded .navItem { justify-content: flex-start; gap: .8rem; }
+.navItem:hover { background: var(--surface-2); color: var(--text); }
+.navItem:hover .ico { color: var(--primary); }
+.active { background: var(--primary-dim) !important; color: var(--primary) !important; }
+.active .ico { color: var(--primary) !important; }
+
+.ico { flex-shrink: 0; color: var(--text-muted); transition: color .15s; }
+
+/* ── Section divider ── */
+.secDivider {
+  display: flex; align-items: center; gap: .375rem;
+  padding: .625rem .75rem .25rem;
+  flex-shrink: 0;
+}
+.secLine { height: 1px; background: var(--border-2); flex: 1; }
+.secDivider .secLine:last-child { display: none; }
+.sidebar.expanded .secDivider .secLine:last-child { display: block; }
+.secTxt {
+  font-size: .7rem; font-weight: 800; letter-spacing: .08em;
+  color: var(--accent); text-transform: uppercase; white-space: nowrap;
+  max-width: 0; overflow: hidden; opacity: 0;
+  transition: max-width .22s ease, opacity .18s ease, padding .18s ease;
+}
+.sidebar.expanded .secTxt { max-width: 120px; opacity: 1; padding: 0 .3rem; }
+
+/* ── Institutional links ── */
+.linkList {
+  display: flex; flex-direction: column;
+  padding: 0 .5rem; gap: .1rem;
+}
+.linkItem {
+  display: flex; align-items: center; gap: 0;
+  padding: .6rem .625rem; border-radius: var(--radius);
+  color: var(--text-muted); text-decoration: none; overflow: hidden;
+  transition: background .15s, color .15s;
+  justify-content: center;
+  background: none; border: none; cursor: pointer; width: 100%;
+}
+.sidebar.expanded .linkItem { justify-content: flex-start; gap: .8rem; }
+.linkItem:hover { background: var(--surface-2); color: var(--text); text-decoration: none; }
+.linkItem:hover .ico { color: var(--primary); }
+
+/* ── Footer ── */
+.sidebarFooter {
+  margin-top: auto;
+  padding: .5rem;
+  flex-shrink: 0;
+}
+.sairBtn {
+  display: flex; align-items: center; gap: 0;
+  padding: .6rem .625rem; border-radius: var(--radius);
+  background: none; color: var(--danger); width: 100%; overflow: hidden;
+  cursor: pointer; transition: background .15s;
+  justify-content: center;
+}
+.sidebar.expanded .sairBtn { justify-content: flex-start; gap: .8rem; }
+.sairBtn:hover { background: rgba(248,113,113,.1); }
+.sairBtn .ico { color: var(--danger); }
+
+/* ── Modal institucional ── */
+.modalOverlay {
+  position: fixed; inset: 0; z-index: 9000;
+  background: rgba(4, 12, 26, 0.72);
+  backdrop-filter: blur(10px);
+  display: flex; align-items: center; justify-content: center;
+  animation: overlayIn .2s ease;
+}
+@keyframes overlayIn { from{opacity:0} to{opacity:1} }
+
+.modalBox {
+  width: 92vw; max-width: 1140px; height: 88vh;
+  background: var(--surface);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 24px 80px rgba(0,0,0,.55), var(--glow);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  animation: modalIn .22s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes modalIn { from{opacity:0;transform:scale(.96) translateY(12px)} to{opacity:1;transform:none} }
+
+.modalHeader {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: .875rem 1.25rem; flex-shrink: 0;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+}
+.modalTitle { font-size: .9375rem; font-weight: 700; color: var(--text); }
+.modalActions { display: flex; align-items: center; gap: .5rem; }
+.modalExtBtn {
+  display: inline-flex; align-items: center; gap: .3rem;
+  font-size: .8rem; font-weight: 600; color: var(--primary);
+  background: var(--primary-dim); border-radius: var(--pill);
+  padding: .3rem .75rem; text-decoration: none;
+  transition: opacity .15s;
+}
+.modalExtBtn:hover { opacity: .8; text-decoration: none; }
+.modalClose {
+  width: 30px; height: 30px; border-radius: 50%; background: none;
+  color: var(--text-muted); display: flex; align-items: center; justify-content: center;
+  transition: background .15s, color .15s;
+}
+.modalClose:hover { background: var(--surface-3); color: var(--text); }
+.modalFrame { flex: 1; width: 100%; border: none; background: var(--surface); }
+
+.modalBlocked {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 1rem;
+  color: var(--text-muted); padding: 2rem;
+}
+.modalBlockedIcon { color: var(--border-2); }
+.modalBlocked p { font-size: .9375rem; }
+.modalBlockedBtn {
+  display: inline-flex; align-items: center; gap: .4rem;
+  padding: .625rem 1.5rem; border-radius: var(--pill);
+  background: var(--gradient); color: #fff; font-weight: 600;
+  text-decoration: none; font-size: .875rem;
+  box-shadow: 0 2px 12px var(--primary-glow);
+}
+.modalBlockedBtn:hover { opacity: .9; text-decoration: none; }
