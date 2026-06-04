@@ -6,6 +6,7 @@ import com.andre.monolito_infnethub.exception.ResourceNotFoundException;
 import com.andre.monolito_infnethub.model.Post;
 import com.andre.monolito_infnethub.model.Usuario;
 import com.andre.monolito_infnethub.repository.ComentarioRepository;
+import com.andre.monolito_infnethub.repository.CurtidaRepository;
 import com.andre.monolito_infnethub.repository.PostRepository;
 import com.andre.monolito_infnethub.repository.UsuarioRepository;
 import com.andre.monolito_infnethub.service.PostService;
@@ -22,6 +23,7 @@ public class PostServiceImpl implements PostService {
     private final PostRepository       postRepository;
     private final UsuarioRepository    usuarioRepository;
     private final ComentarioRepository comentarioRepository;
+    private final CurtidaRepository    curtidaRepository;
 
     @Override
     @Transactional(readOnly = true)
@@ -73,6 +75,8 @@ public class PostServiceImpl implements PostService {
         if (!postRepository.existsById(id)) {
             throw new ResourceNotFoundException("Post não encontrado com id: " + id);
         }
+        curtidaRepository.deleteByPostId(id);
+        comentarioRepository.deleteByPostId(id);
         postRepository.deleteById(id);
     }
 
