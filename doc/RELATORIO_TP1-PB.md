@@ -250,6 +250,16 @@ O Spring Boot autoconfigurou automaticamente:
 - Conversão JSON via Jackson (`MappingJackson2HttpMessageConverter`)
 - Validação via Hibernate Validator
 
+### Iniciação do Projeto — Spring Initializr via IntelliJ
+
+O projeto foi iniciado diretamente no IntelliJ IDEA usando o gerador Spring Boot integrado, apontando para `start.spring.io`.
+
+![Configuração do projeto no IntelliJ — nome, grupo, artifact, Java 25 e Maven](screenshots/01_spring-initializr-IntelliJ.png)
+*Spring Initializr configurado com Maven, Java 25, group `com.andre` e artifact `monolito_infnet-hub`.*
+
+![Dependências selecionadas — Lombok, Spring Web, DevTools, Spring Data JPA](screenshots/02_spring-initializr-IntelliJ.png)
+*Dependências adicionadas: Lombok, Spring Web, Spring Boot DevTools e Spring Data JPA.*
+
 ### Tabela de Endpoints
 
 **Usuários**
@@ -329,6 +339,14 @@ frontend/src/services/
   ├── postService.ts     → fetch() http://localhost:8080/api/v1/posts
   └── vagaService.ts     → fetch() http://localhost:8080/api/v1/vagas
 ```
+
+### Screenshots da Interface
+
+![Tela de acesso — seleção de perfil institucional](screenshots/tela_acesso.png)
+*Tela de login com seleção de perfil. Usuários são carregados via `GET /api/v1/usuarios` ao montar o componente.*
+
+![Feed principal — publicações, curtidas e comentários](screenshots/feed_infnetHub.png)
+*Feed com publicações, sistema de curtidas, comentários, sidebar com calendário acadêmico e painel de atendimento institucional.*
 
 ### Ativos Visuais
 
