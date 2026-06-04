@@ -50,9 +50,7 @@ A arquitetura segue o padrão de camadas do Spring MVC com separação clara de 
 
 ## Screenshots
 
-| Tela de Acesso | Feed |
-|---|---|
-| ![Tela de acesso — seleção de perfil](doc/screenshots/tela_acesso.png) | ![Feed — publicações e interações](doc/screenshots/feed_infnetHub.png) |
+![Feed — publicações e interações](doc/screenshots/feed_infnetHub.png)
 
 ---
 
